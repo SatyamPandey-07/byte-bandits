@@ -1,59 +1,26 @@
-import gsap from "gsap";
-import { useWindowScroll } from "react-use";
-import { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
-import Button from "./Button";
-
-const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
+const navItems = ["Shop", "Discover", "Help"];
 
 const NavBar = () => {
   const navContainerRef = useRef(null);
-  const { y: currentScrollY } = useWindowScroll();
-  const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
-    } else if (currentScrollY < lastScrollY) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
-    }
-
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
-
-  useEffect(() => {
-    gsap.to(navContainerRef.current, {
-      y: isNavVisible ? 0 : -100,
-      opacity: isNavVisible ? 1 : 0,
-      duration: 0.2,
-    });
-  }, [isNavVisible]);
 
   return (
     <div
       ref={navContainerRef}
-      className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
+      className="fixed inset-x-0 top-0 z-50 h-16 bg-white/80 backdrop-blur-md shadow-md transition-all duration-300"
     >
       <header className="absolute top-1/2 w-full -translate-y-1/2">
-        <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
+        <nav className="flex items-center justify-between px-6">
           <div className="flex items-center gap-7">
-            <img src=".." alt="logo" className="w-10" />
+            <img src="src\assets\lego-symbol.png" alt="logo" className="w-20" />
           </div>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex h-full items-center space-x-6">
+          <div className="flex items-center space-x-6">
             {navItems.map((item, index) => (
               <a
                 key={index}
                 href={`#${item.toLowerCase()}`}
-                className="nav-hover-btn"
+                className="text-gray-800 hover:text-blue-500 transition-colors"
               >
                 {item}
               </a>

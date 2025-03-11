@@ -47,6 +47,22 @@ const Hero = () => {
     }
   }, [loading]);
 
+    const handleLogoClick = () => {
+      // LEGO Blocks Subtle Animation Before Scroll
+      gsap.to(blockRefs.current, {
+        y: "+=20",
+        rotation: "+=10",
+        duration: 0.5,
+        ease: "power1.inOut",
+      });
+  
+      gsap.to(window, {
+        scrollTo: { y: "#inf-section", autoKill: false },
+        duration: 1.5,
+        ease: "power2.inOut",
+      });
+    };
+
   const handleVideoLoad = () => {
     setLoading(false);
   };
@@ -68,7 +84,7 @@ const Hero = () => {
       )}
 
       <div className="relative z-10 h-dvh w-screen overflow-hidden">
-        {/* Background Video */}
+  
         <video
           ref={videoRef}
           src="/back-lego.mp4"
@@ -85,19 +101,20 @@ const Hero = () => {
             ref={headingRef}
             className="special-font hero-heading text-yellow-300 text-9xl"
           >
-            Redefi<b>n</b>e
+            Redefi<b>n</b>e Playing
           </h1>
           <p
             ref={subheadingRef}
             className="mt-4 max-w-xl text-blue-100 text-lg md:text-2xl"
           >
-            Enter the Metagame Layer <br /> Unleash the Play Economy
+            Stacking Smiles since <br /> forever!!! 
           </p>
 
           <Button
-            id="watch-trailer"
-            title="Watch Trailer"
+            id="Next"
+            title="Next"
             containerClass="bg-yellow-300 text-black flex-center gap-2 mt-5 px-6 py-3 rounded-lg text-lg font-bold"
+            onClick={handleLogoClick}
           />
         </div>
       </div>
